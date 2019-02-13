@@ -1,0 +1,41 @@
+{
+  "connection": "default",
+  "collectionName": "dish",
+  "info": {
+    "name": "dish",
+    "description": "菜單"
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "default": "name",
+      "type": "string",
+      "required": true
+    },
+    "desc": {
+      "default": "說明..",
+      "type": "text"
+    },
+    "images": {
+      "collection": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
+    },
+    "price": {
+      "default": "",
+      "type": "integer",
+      "required": true
+    },
+    "show": {
+      "default": true,
+      "type": "boolean"
+    },
+    "restaurant": {
+      "model": "restaurant",
+      "via": "dishes"
+    }
+  }
+}

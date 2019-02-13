@@ -1,0 +1,36 @@
+{
+  "connection": "default",
+  "collectionName": "restaurant",
+  "info": {
+    "name": "restaurant",
+    "description": "餐廳"
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "default": "餐廳名稱",
+      "type": "string",
+      "required": true
+    },
+    "desc": {
+      "default": "內容...",
+      "type": "text"
+    },
+    "images": {
+      "collection": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
+    },
+    "show": {
+      "default": true,
+      "type": "boolean"
+    },
+    "dishes": {
+      "collection": "dish",
+      "via": "restaurant"
+    }
+  }
+}
