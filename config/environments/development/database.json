@@ -12,7 +12,6 @@
         "password": ""
       },
       "options": {
-        "authenticationDatabase": "",
         "ssl": false
       }
     }
