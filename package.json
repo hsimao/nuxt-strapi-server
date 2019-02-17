@@ -21,7 +21,8 @@
   "dependencies": {
     "lodash": "^4.17.5",
     "strapi": "3.0.0-alpha.23.1",
-    "strapi-hook-mongoose": "3.0.0-alpha.23.1"
+    "strapi-hook-mongoose": "3.0.0-alpha.23.1",
+    "stripe": "^6.25.1"
   },
   "author": {
     "name": "chenhsi-mao",
