@@ -4,43 +4,50 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
-import { bindActionCreators } from 'redux';
-import cn from 'classnames';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { createSelector } from "reselect";
+import { bindActionCreators } from "redux";
+import cn from "classnames";
 
-import { ButtonDropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
+import {
+  ButtonDropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle
+} from "reactstrap";
 
-import { selectLocale } from 'containers/LanguageProvider/selectors';
-import { changeLocale } from 'containers/LanguageProvider/actions';
-import { languages } from 'i18n';
+import { selectLocale } from "containers/LanguageProvider/selectors";
+import { changeLocale } from "containers/LanguageProvider/actions";
+import { languages } from "i18n";
 
-import styles from './styles.scss';
+import styles from "./styles.scss";
 
-export class LocaleToggle extends React.Component { // eslint-disable-line
+export class LocaleToggle extends React.Component {
+  // eslint-disable-line
   state = { isOpen: false };
 
-  getFlagUrl = (locale) => {
+  getFlagUrl = locale => {
     switch (locale) {
-      case 'en':
-        return 'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/flags/4x3/us.svg';
-      case 'pt-BR':
-        return 'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/flags/4x3/br.svg';
-      case 'zh':
-      case 'zh-Hans':
-        return 'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/flags/4x3/cn.svg';
-      case 'ar':
-        return 'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/flags/4x3/sa.svg';
-      case 'ko':
-        return 'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/flags/4x3/kr.svg';
-      case 'ja':
-        return 'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/flags/4x3/jp.svg';
+      case "en":
+        return "https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/flags/4x3/us.svg";
+      case "pt-BR":
+        return "https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/flags/4x3/br.svg";
+      case "zh":
+        return "https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/flags/4x3/tw.svg";
+      case "zh-Hans":
+        return "https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/flags/4x3/cn.svg";
+      case "ar":
+        return "https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/flags/4x3/sa.svg";
+      case "ko":
+        return "https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/flags/4x3/kr.svg";
+      case "ja":
+        return "https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/flags/4x3/jp.svg";
       default:
         return `https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/flags/4x3/${locale}.svg`;
     }
-  }
+  };
 
   toggle = () => this.setState(prevState => ({ isOpen: !prevState.isOpen }));
 
@@ -54,9 +61,21 @@ export class LocaleToggle extends React.Component { // eslint-disable-line
             <span>{locale}</span>
             <img src={this.getFlagUrl(locale)} alt={locale} />
           </DropdownToggle>
-          <DropdownMenu className={cn(styles.localeDropdownMenu, this.props.isLogged ? '' : styles.localeDropdownMenuNotLogged)}>
+          <DropdownMenu
+            className={cn(
+              styles.localeDropdownMenu,
+              this.props.isLogged ? "" : styles.localeDropdownMenuNotLogged
+            )}
+          >
             {languages.map(language => (
-              <DropdownItem key={language} onClick={() => this.props.changeLocale(language)} className={cn(styles.localeToggleItem, locale === language ? styles.localeToggleItemActive : '')}>
+              <DropdownItem
+                key={language}
+                onClick={() => this.props.changeLocale(language)}
+                className={cn(
+                  styles.localeToggleItem,
+                  locale === language ? styles.localeToggleItemActive : ""
+                )}
+              >
                 {language.toUpperCase()}
               </DropdownItem>
             ))}
@@ -67,26 +86,27 @@ export class LocaleToggle extends React.Component { // eslint-disable-line
   }
 }
 
-
-
 LocaleToggle.propTypes = {
   changeLocale: PropTypes.func.isRequired,
   isLogged: PropTypes.bool.isRequired,
-  locale: PropTypes.string.isRequired,
+  locale: PropTypes.string.isRequired
 };
 
 const mapStateToProps = createSelector(
   selectLocale(),
-  (locale) => ({ locale })
+  locale => ({ locale })
 );
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      changeLocale,
+      changeLocale
     },
-    dispatch,
+    dispatch
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LocaleToggle);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LocaleToggle);
